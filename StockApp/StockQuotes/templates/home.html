@@ -8,12 +8,34 @@
         <title>Project-4 Homepage</title>  
     </head>
     <body>
-        <h1>Hello World</h1>
-        <br/>
-        <br/>
+        {% if api %}
+            {% if api == "Error..." %}
+                There was a problem with your ticker symbol, 
+                please try again...
+            {% else %}
+                <h1>{{ api.companyName }}</h1>
+                <br/>
+                Price: ${{ api.latestPrice }}<br/>
+                Previous Close: {{ api.previousClose }}<br/>
+                Market Cap: {{ api.marketCap }}<br/>
+                YTD Change: {{ api.ytdChange }}<br/>
+                52 Week High: {{ api.week52High }}<br/>
+                52 Week Low: {{ api.week52Low }}<br/>
 
-        {{ api }}
+            {% comment %}
+                {% for key, value in api.items %}
+                    {{ key }} : {{ value }}
+                    <br/>
+                    {% endfor %}
+            {% endcomment %}
+            
+            {% endif %}
         
+        {% else %}
+
+
+        {% endif %}
+
         </body>
     </body>
 

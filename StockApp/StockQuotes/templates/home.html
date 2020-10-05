@@ -8,6 +8,10 @@
         <title>Project-4 Homepage</title>  
     </head>
     <body>
+        {% if ticker %}
+            {{ ticker }}
+        {% endif %}
+
         {% if api %}
             {% if api == "Error..." %}
                 There was a problem with your ticker symbol, 
@@ -28,7 +32,7 @@
                     <br/>
                     {% endfor %}
             {% endcomment %}
-            
+
             {% endif %}
         
         {% else %}

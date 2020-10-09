@@ -43,7 +43,9 @@
                             <td>{{ list_item.ytdChange }}</td>
                             <td>{{ list_item.week52High }}</td>
                             <td>{{ list_item.week52Low }}</td>
-                            <td><a href = "/">Delete Stock</a></td>
+                            <td>{% for item in ticker %}
+                                    {{ item }}<a href = "{% url 'delete' item.id %}">Delete Stock</a>
+                                {% endfor %}</td>
                     </tr>
                         {% endfor %}
                 {% endif %}

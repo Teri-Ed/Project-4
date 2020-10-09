@@ -25,20 +25,54 @@
                 YTD Change: {{ api.ytdChange }}<br/>
                 52 Week High: {{ api.week52High }}<br/>
                 52 Week Low: {{ api.week52Low }}<br/>
-
-            {% comment %}
-                {% for key, value in api.items %}
-                    {{ key }} : {{ value }}
-                    <br/>
-                    {% endfor %}
-            {% endcomment %}
+                <br/>
 
             {% endif %}
         
         {% else %}
 
-
         {% endif %}
+
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Initial Amount</th>
+                <th scope="col">Current Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>$2000</td>
+                <td>TBD</td>
+              </tr>
+
+        {% if api %}
+            {% if api.latestPrice %}
+                <a href = "{% url 'buy_stock' %}" class = "btn btn-success">Buy Stock</a>
+            {% else %}
+
+            {% endif %}
+        {% endif %}
+
+        {% if api %}
+            {% if api.latestPrice %}
+                <a href = "{% url 'sell_stock' %}" class = "btn btn-danger">Sell Stock</a>
+            {% else %}
+
+            {% endif %}
+        {% endif %}
+
+        {% comment %}
+        {% for item in ticker %}
+            {{ item }}<a href = "{% url 'delete' item.id %}">Delete Stock</a>
+        {% endfor %}
+
+        {% for key, value in api.items %}
+                    {{ key }} : {{ value }}
+                    <br/>
+        {% endfor %}
+        {% endcomment %}
+
 
         </body>
     </body>

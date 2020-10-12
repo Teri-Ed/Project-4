@@ -29,7 +29,6 @@
                 <th scope="col">YTD Change</th>
                 <th scope="col">52 Week High</th>
                 <th scope="col">52 Week Low</th>
-                <th scope="col">Delete Stock</th>
               </tr>
             </thead>
             <tbody>
@@ -43,9 +42,6 @@
                             <td>{{ list_item.ytdChange }}</td>
                             <td>{{ list_item.week52High }}</td>
                             <td>{{ list_item.week52Low }}</td>
-                            <td>{% for item in ticker %}
-                                    {{ item }}<a href = "{% url 'delete' item.id %}">Delete Stock</a>
-                                {% endfor %}</td>
                     </tr>
                         {% endfor %}
                 {% endif %}

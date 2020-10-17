@@ -1,24 +1,22 @@
 from django.shortcuts import render, redirect
 from .models import Stock, Bank, BuyStockModel
-from .forms import StockForm, BankForm, BuyStock
+from .forms import StockForm, BankForm, BuyStock, Registration
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 import requests 
 import json
 
-def home(request):
+def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = Registration(request.POST)
         if form.is_valid():
             form.save()
         
-        return redirect('ticker.html')
+        return redirect('login/')
     else:
-        form = UserCreationForm()
-        return render(request, 'home.html', {"form" : form})
+        form = Registration()
+        return render(request, 'register.html', {"form" : form})
 
-def ticker(request):
+def main(request):
     if request.method == 'POST':
         ticker = request.POST['ticker']
         #pk_c9d8aa3cdbc143dc9af6fe0d62e7d6d4
@@ -28,9 +26,9 @@ def ticker(request):
             api = json.loads(api_request.content)
         except Exception as e:
             api = "Error..."
-        return render(request, 'ticker.html', {'api': api}) 
+        return render(request, 'main.html', {'api': api}) 
     else:
-        return render(request, 'ticker.html', {'ticker': "Enter a Ticker symbol above..."})
+        return render(request, 'main.html', {'ticker': "Enter a ticker symbol to get your quote."})
 
 def sell_stock(request):
     return render(request, 'about.html', {})

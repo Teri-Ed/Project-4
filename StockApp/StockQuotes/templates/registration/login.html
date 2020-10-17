@@ -5,14 +5,15 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Project-4 Home page</title>  
+        <title>Project-4 Login page</title>  
     </head>
     <body>
+    
+        {% load crispy_forms_tags %}
         <form method = "POST" class = "form-group">
             {% csrf_token %}
-            {{ form.as_p }}
-
-            <button type="submit" class="btn btn-success">Register</button>
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-success">Login</button>
         </form>
     </body>
 

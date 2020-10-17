@@ -11,6 +11,17 @@
         <div class="container">
             <div class="row">
               <div class="col">
+                <br/>
+                <br/>
+                <br/>
+                <form action = "{%url 'main' %}" class="form-inline my-2 my-lg-0" method = "POST">
+                    {% csrf_token %}
+                  <input class="form-control mr-sm-2" type="search" placeholder="Get Stock Quote" aria-label="Search" name = "ticker">
+                  <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Stock Quote</button>
+                </form>
+                <br/>
+                <br/>
+                <br/>
                 {% if ticker %}
                     {{ ticker }}
                 {% endif %}
@@ -40,6 +51,9 @@
 
               </div>
               <div class="col">
+                <br/>
+                <br/>
+                <br/>
                 <h1>Buy Stock</h1>
                 <br/>
                 <div class = "form-group">

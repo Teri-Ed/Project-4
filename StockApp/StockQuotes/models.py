@@ -7,14 +7,30 @@ class Stock(models.Model):
         return self.ticker
 
 class Bank(models.Model):
-    money = models.CharField(max_length = 10)
+    account = models.DecimalField(max_digits = 15, default = 30000.0, decimal_places = 0, editable = True)
 
-    def __str__(self):
-        return self.money
 
 class BuyStockModel(models.Model):
     name = models.CharField(max_length = 100)
-    price = models.FloatField()
-    quantity = models.IntegerField()
+    price = models.DecimalField(max_digits = 15, decimal_places = 2)
+    quantity = models.DecimalField(max_digits = 15, decimal_places = 0)
+    account = models.DecimalField(max_digits = 15, default = 30000.0, decimal_places = 0, editable = True)
+    total_value = models.DecimalField(max_digits = 15, default = 1, decimal_places = 0, editable = True)
     created = models.DateTimeField(auto_now_add = True)
+
+    def calc_total(self):
+        amount = (self.price * self.quantity)
+        return amount
+
+    def save_total(self):
+        self.total_value = self.calc_total()
+        super(BuyStockModel, self).save()
+        
+    def bank_account(self):
+        money = (self.account - (self.price * self.quantity))
+        return money
+
+    def bank_total(self):
+        self.account = self.bank_account
+        super(BuyStockModel, self).save() 
 

@@ -9,7 +9,7 @@ class StockForm(forms.ModelForm):
 class BankForm(forms.ModelForm):
     class Meta:
         model = Bank
-        fields = ["money"]
+        fields = ["account"]
 
 class BuyStock(forms.ModelForm):
     class Meta:

@@ -8,15 +8,15 @@
         <title>Project-4 Buy Stock page</title>  
     </head>
     <body>
+        <div class="container"></div>
         <h1>Buy Stock</h1>
         <br/>
-        <div class = "form-group"></div>
+        <div class = "form-group">
             <form method = "POST">
                 {% csrf_token %}
                 {{ form.as_p }}
 
                 <button type="submit" class="btn btn-success">Buy Stock</button>
-                <button type="submit" class="btn btn-danger">Sell Stock</button>
             </form>
         </div>
           <br/>
@@ -30,20 +30,29 @@
                     <th scope="col">Stock Price</th>
                     <th scope="col">Shares Purchased</th>
                     <th scope="col">Total Value</th>
+                    <th scope="col">Bank Account</th>
                 </tr>
                 </thead>
                 <tbody>
-                    {% for item in stocks %}
+                        {% for item in stocks %}
                     <tr>
+                            {% load humanize %}
                             <th scope="row">{{ item.created }}</th>
                             <td>{{ item.name }}</td>
-                            <td>{{ item.price }}</td>
-                            <td>{{ item.quantity }}</td>
-                            <td>{{ item.name }}</td>
+                            <td>${{ item.price|intcomma }}</td>
+                            <td>{{ item.quantity|intcomma }} Shares</td>
+                            <td>${{ item.calc_total|intcomma }}</td>
+                            <td>${{ item.bank_account|intcomma }}</td>
                     </tr>
                         {% endfor %}
+
                 </tbody>
             </table>
+        </div>
+        <br/>
+        {% for item in stocks %}
+            <a class="btn btn-danger" href = "{% url 'sell_stock' item.id %}">Delete {{ item.name }}</a> &nbsp;&nbsp;&nbsp;
+        {% endfor %}
         </div>
     </body>
 
